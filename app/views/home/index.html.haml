@@ -1,5 +1,17 @@
 %h1 Welcome to Rubysteps
 %h2 Lessons
-- @topics.each do |topic|
-  %h3= topic.title
-  %p= topic.description
+:javascript
+  $(function(){
+    var get_topics = function(){
+      $.ajax({
+        url: "#{api_topics_path}",
+        datatype: 'json',
+        success: function(data){
+        $.each(data, function(topic){
+          $('#topics').html('<h3>'+topic.title+'</h3>');
+          });
+        }
+      });
+    };
+    get_topics();
+  });
